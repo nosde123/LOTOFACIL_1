@@ -1,0 +1,60 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class Lotofacil {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+
+        int opcao;
+
+        do {
+            System.out.println("**************************");
+            System.out.println("Menu LOTOFÁCIL:");
+            System.out.println("1) Apostar de 0 a 100");
+            System.out.println("0) Sair");
+            System.out.println("**************************");
+
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+
+            switch (opcao) {
+                case 1:
+                    System.out.print("Faça sua aposta (0 a 100): ");
+                    int numeroApostado = scanner.nextInt();
+
+                    if (numeroApostado < 0 || numeroApostado > 100) {
+                        System.out.println("Aposta inválida.");
+                    } else {
+                        System.out.print("Quantas vezes você deseja apostar este número (até 10 vezes): ");
+                        int quantidadeApostas = scanner.nextInt();
+
+                        if (quantidadeApostas <= 10) {
+                            for (int i = 0; i < quantidadeApostas; i++) {
+                                int numeroSorteado = random.nextInt(101); // Sorteia um número de 0 a 100
+                                System.out.println("Número sorteado: " + numeroSorteado);
+
+                                if (numeroApostado == numeroSorteado) {
+                                    System.out.println("Parabéns! Você ganhou na " + (i + 1) + "ª aposta!");
+                                } else {
+                                    System.out.println("Que pena! Você perdeu na " + (i + 1) + "ª aposta.");
+                                }
+                            }
+                        } else {
+                            System.out.println("Você pode fazer no máximo 10 apostas.");
+                        }
+                    }
+                    break;
+                case 0:
+                    System.out.println("Saindo do sistema LOTOFÁCIL.");
+                    break;
+                default:
+                    System.out.println("Opção inválida. Tente novamente.");
+            }
+
+        } while (opcao != 0);
+
+        scanner.close();
+    }
+}
+ 
