@@ -1,0 +1,86 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class LotofacilInterface extends JFrame {
+
+    private JButton botaoNumerico, botaoAlfabetico, botaoParImpar;
+    private JTextField campoEntrada;
+
+    public LotofacilInterface() {
+        // Configuração da janela
+        setTitle("LOTOFÁCIL");
+        setSize(300, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLayout(new FlowLayout());
+
+        // Inicialização dos componentes
+        botaoNumerico = new JButton("Apostar de 0 a 100");
+        botaoAlfabetico = new JButton("Apostar de A a Z");
+        botaoParImpar = new JButton("Apostar Par ou Ímpar");
+        campoEntrada = new JTextField(10);
+
+        // Adiciona os componentes à janela
+        add(botaoNumerico);
+        add(botaoAlfabetico);
+        add(botaoParImpar);
+        add(campoEntrada);
+
+        // Adiciona os ouvintes de ação para os botões
+        botaoNumerico.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                apostarNumerico();
+            }
+        });
+
+        botaoAlfabetico.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                apostarAlfabetico();
+            }
+        });
+
+        botaoParImpar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                apostarParImpar();
+            }
+        });
+    }
+
+    private void apostarNumerico() {
+        String entrada = campoEntrada.getText();
+        int numeroApostado = Integer.parseInt(entrada);
+
+        // Implementa a lógica de aposta numérica usando um switch
+        switch (numeroApostado) {
+            case 0:
+            case 1:
+            case 2:
+                JOptionPane.showMessageDialog(null, "Aposta entre 0 e 2.");
+                break;
+            // Adicione mais cases conforme necessário para tratar outros números
+            default:
+                JOptionPane.showMessageDialog(null, "Número de aposta inválido.");
+                break;
+        }
+    }
+
+    // Implemente a lógica de aposta alfabética
+    private void apostarAlfabetico() {
+        // Exibe o resultado usando JOptionPane.showMessageDialog()
+        JOptionPane.showMessageDialog(null, "Aposta alfabética.");
+    }
+
+    // Implemente a lógica de aposta par/ímpar
+    private void apostarParImpar() {
+        // Exibe o resultado usando JOptionPane.showMessageDialog()
+        JOptionPane.showMessageDialog(null, "Aposta par/ímpar.");
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            LotofacilInterface lotofacilInterface = new LotofacilInterface();
+            lotofacilInterface.setVisible(true);
+        });
+    }
+}
