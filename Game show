@@ -1,0 +1,80 @@
+import java.util.Random;
+import java.util.Scanner;
+public class GameShow {
+
+    public static void main(String[] args) {
+        Scanner scan = new Scanner (System.in);
+        Random generator = new Random();
+
+        // Declarando variaveis
+        int portaEscolhida,
+                portaAberta,
+                outraPorta,
+                portaPremiada;
+
+        // Gerando aleatorios as portas
+        portaPremiada = generator.nextInt(3)+1;
+        portaAberta = portaPremiada;
+
+        while(portaAberta == portaPremiada){
+            portaAberta = generator.nextInt(3)+1;
+        }
+
+        outraPorta = portaAberta;
+
+        while (outraPorta == portaAberta || outraPorta == portaPremiada){
+            outraPorta = generator.nextInt(3)+1;
+        }
+
+        // iniciando o jogos mortais
+        System.out.println("*** Que jogos comecem Monty Hall! ***");
+        System.out.println("Selecione as portas (1, 2, or 3): ");
+        portaEscolhida = scan.nextInt();
+
+
+        // validação
+        if (portaEscolhida > 3 || portaEscolhida < 0) {
+            System.out.println("Por favor escolhe as portas 1, 2, or 3");
+            portaEscolhida = scan.nextInt();
+        } else if(portaEscolhida == 1 || portaEscolhida == 2 ||  portaEscolhida == 3) {
+
+            //Continue
+            System.out.println("\n Em um momento, mostrarei onde está localizado o prêmio,");
+            System.out.println("mas primeiro vou mostrar o que está atrás de uma das outras portas");
+
+            //dialogo
+            System.out.println("Voce selecionou "  + portaEscolhida);
+            System.out.println("\n atras da porta " + portaAberta + " tem cabras!");
+
+            if(portaEscolhida == portaAberta){
+                System.out.println("Parabéns! voce perdeu!");
+            } else {
+                System.out.println("\n Hm voce gostaria de trocar de porta?(s/n)? ");
+            }
+            //peguei da biblioteca de um gringo
+            char userReply = scan.next().charAt(0);
+
+            //valiação do s / n
+            while(userReply != 's' && userReply != 'n')
+            {
+                System.out.println("Por favor insira s/n");
+                userReply = scan.next().charAt(0);
+            }
+            if (userReply == 's')
+            {
+                portaEscolhida = outraPorta;
+            }
+
+            System.out.println("O prêmio está atrás do número da porta: " + portaPremiada);
+
+            //Checando se voce ganhou ou perdeu
+            if(portaEscolhida == portaPremiada){
+                System.out.println("Parabéns! Você ganhou o prêmio!");
+            } else {
+                System.out.println("Puts perdeu tudo ratinho.");
+            }
+
+        }
+    }
+}
+
